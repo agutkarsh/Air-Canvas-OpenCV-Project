@@ -75,30 +75,30 @@ Then, we declared a variable center which will be later used to store the coordi
 - Now we have to decide for this region of circle that which point in it to select for reference and also it's color. But one problem here is in this region there are infinitely many points and we can’t decide by checking for all the points so we have to take a reference point according to which our decision should be made. The most logical for picking this point is to pick the centroid of the contours. By generating the moments we found the centroid of the contour and stored the centroid coordinates in the ‘ center’ variable.
 
  ### Maths Behind Moments 
-Image moments are a set of statistical parameters to measure the distribution of where the pixels are and their intensities. Mathematically, the image moment Mij of order (i,j) for a greyscale image with pixel intensities I(x,y) is calculated as
+Image moments are a set of statistical metrics that quantify the distribution of pixel locations and intensities. The image moment Mij of order (i,j) for a greyscale image with pixel intensities I(x,y) can be calculated mathematically as
 ![moment-1](https://user-images.githubusercontent.com/85826885/123540214-93681600-d75b-11eb-8653-a03ec76e790e.jpg)
 
-Here, x, y refers to the row and column index and I(x,y) refers to the intensity at that location (x,y). Now, let’s discuss how simple image properties are calculated from image moments.
+The row and column indexes are x and y, respectively, and the intensity at that point is I(x,y) (x,y). Let's have a look at how image moments are used to determine basic picture properties.
 ###### Area:
-For a binary image, the zeroth order moment corresponds to the area. Let’s discuss how?
-Using the above formulae, the zeroth order moment (M00) is given by
+The area of a binary image corresponds to the zeroth-order moment. Let's discuss how? Using the above formulae, the zeroth-order moment (M00) is given by
 
 ![moment_0-1](https://user-images.githubusercontent.com/85826885/123540917-1048bf00-d75f-11eb-84f9-35a1fa4b56af.jpg)
 
-For a binary image, this corresponds to counting all the non-zero pixels and that is equivalent to the area. For greyscale image, this corresponds to the sum of pixel intensity values.
+This equates to counting all the non-zero pixels in a binary image, identical to the area. This relates to the sum of pixel intensity values in a greyscale image.
+
 ###### Centroid:
-Centroid simply is the arithmetic mean position of all the points. In terms of image moments, centroid is given by the relation
+The arithmetic mean position of all the points is the centroid. In terms of image moments, the centroid is given by
 ![moment_cent](https://user-images.githubusercontent.com/85826885/123540927-18086380-d75f-11eb-96fa-cd8e355fbcea.jpg)
 
 This is simple to understand. For instance, for a binary image M10 corresponds to the sum of all non-zero pixels (x-coordinate) and M00 is the total number of non-zero pixels and that is what the centroid is.
 
 
 ### Continuing the Implementation ...
-- Now comes the part where we decide what action must be taken for a particular point. As stated above we would use the centroid(i.e. center) as reference for deciding the action.
+- Now it's time to decide what we're going to do. Action must be taken for a particular point. As stated above, we would use the centroid(i.e., center) as a reference for deciding the action.
 
 - *Case 1*
  
-    If the y coordinate of center lies where our boxes (Clear,Blue,Green,Red ,Yellow ) are present. It means one of these buttons is clicked . Further five cases are present ,       these five cases represent which button is clicked and it can be easily found by checking the x- coordinate of the center . All cases and their actions are summarised below :-
+     Suppose the y coordinate of the center lies where our boxes (Clear, Blue, Green, Red, Yellow ) are present. It means one of these buttons is clicked. Further five cases are      present, these five cases represent which button is clicked, and it can be easily found by checking the x- coordinate of the center. All cases and their actions are              summarised below:-
 
      If the CLEAR ALL button is pressed we clear all the four deques and set all indexes to 0 indicating that now nothing is present in any of the deques. And also we clear the        paint window means we will color all the paint window white.
      
@@ -112,7 +112,7 @@ This is simple to understand. For instance, for a binary image M10 corresponds t
 
 - *Case 2*
 
-    If the y coordinate of the center lies in the drawing region . In this case further 4 cases are possible . They are as follows :
+     Suppose the y coordinate of the center lies in the drawing region. In this case, further 4 cases are possible. They are as follows :
 
      If color index=0, it means we have to use blue color for drawing . So we will append this center point to the blue deque.
      
@@ -122,7 +122,7 @@ This is simple to understand. For instance, for a binary image M10 corresponds t
      
      If color index=3, it means we have to use yellow for drawing . So we will append this center point to the blue deque.
 
-- It was for the case when we found some contours , but another case which is possible when we have no contours (i.e contour array is empty) . This case indicates that no blue color bead is detected in this frame (here, in the absence of blue bead). So in this case we simply have to do nothing but we can not neglect it as when the bead appears in future frame to another position it does not make a straight line of that color between those two. In this case we will remove the deque of the previous points from each of the four array of deques as all the latest deques must have been processed before reaching this point of time and then we will insert a fresh deque to each of the four arrays so that we can store more points in future.
+- When we found some contours, it was for the case, but another case is possible when we have no contours (i.e., contour array is empty). This case indicates that no blue color bead is detected in this frame (here, in the absence of a blue bead). So, we have to do nothing in this case, but we can not neglect it as when the bead appears in the future frame to another position, it does not make a straight line of that color between those two. In this case, we will remove the deque of the previous points from each of the four arrays of deques as all the latest deques must have been processed before reaching this point of time, and then we will insert a fresh deque to each of the four arrays so that we can store more points in future.
  
 - Finally now we have to show the output  for each frame. We will do this by processing all arrays of deques as every deque of every array may or may not contain some points. So we check for each deque.  If it is not empty we join all the points in the deque by the correct color( it will be known as we know which array this current deque belongs to) in both paint window and frame window by using cv2.line() function. Finally we showed the output using cv2.imshow().
 
