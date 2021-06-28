@@ -33,7 +33,7 @@ As mentioned above, we first imported all the required libraries, including cv2,
 
 Our whole task was primarily boiled down to three things- namely- color detection, tracking and drawing on the canvas.
 
- #### *For thecolor detection part*,
+ #### *For the color detection part*,
 - We used OpenCV function “createTrackbar()” used to track colors in HSV space. So, we created six different track bars for upper Hue, upper Saturation, upper Value, lower Hue, lower Saturation, and lower Value where 'Hue' represents the color, 'Saturation'- the amount to which that respective color is mixed with white & 'Value'- the amount to which that respective color is mixed with black (Gray level).
 So we set values of parameters in the createTrackbar function parameters by changing the parameter values using trackbar to get the tracking of Blue bead, which we have used as a marker. 
 
