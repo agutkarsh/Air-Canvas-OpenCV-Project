@@ -115,11 +115,11 @@ This is simple to understand. For instance, for a binary image M10 corresponds t
 
      If color index=0, it means we have to use blue color for drawing . So we will append this center point to the blue deque.
      
-     If color index=1, it means we have to use green color for drawing . So we will append this center point to the blue deque.
+     If color index=1, it means we have to use green color for drawing . So we will append this center point to the green deque.
      
-     If color index=2, it means we have to use red color for drawing . So we will append this center point to the blue deque.
+     If color index=2, it means we have to use red color for drawing . So we will append this center point to the red deque.
      
-     If color index=3, it means we have to use yellow for drawing . So we will append this center point to the blue deque.
+     If color index=3, it means we have to use yellow for drawing . So we will append this center point to the yellow deque.
 
 - When we found some contours, it was for the case, but another case is possible when we have no contours (i.e., contour array is empty). This case indicates that no blue color bead is detected in this frame (here, in the absence of a blue bead). So, we have to do nothing in this case, but we can not neglect it as when the bead appears in the future frame to another position, it does not make a straight line of that color between those two. In this case, we will remove the deque of the previous points from each of the four arrays of deques as all the latest deques must have been processed before reaching this point of time, and then we will insert a fresh deque to each of the four arrays so that we can store more points in future.
  
